@@ -28,11 +28,13 @@ orbbec/
 │   ├── read_camera_params.py
 │   └── record_video_ffmpeg.py
 ├── outputs/
+│   ├── camera_params/
 │   ├── screenshots/
 │   ├── videos/
 │   └── rgbd/
 └── tests/
-    └── test_capture_rgbd_orbbec_sdk.py
+    ├── test_capture_rgbd_orbbec_sdk.py
+    └── test_read_camera_params.py
 ```
 
 `outputs/` 只用于保存运行结果，不作为源码内容提交。历史截图、视频、RGB-D 数据和 SDK 日志已通过 `.gitignore` 忽略。
@@ -137,11 +139,32 @@ python scripts/capture_rgbd_orbbec_sdk.py \
 - `*.json`：单帧元数据。
 - `manifest.jsonl`：本次采集索引。
 
+当前 README 使用的本地 RGB-D 示例来自：
+
+```text
+outputs/rgbd/20260612_150336_276/
+├── rgb/
+│   └── orbbec_rgbd_0001_color.jpg
+├── depth/
+│   ├── orbbec_rgbd_0001_depth_m.npy
+│   ├── orbbec_rgbd_0001_depth_m.png
+│   └── orbbec_rgbd_0001_depth_preview.jpg
+├── orbbec_rgbd_0001.json
+└── manifest.jsonl
+```
+
+| RGB | Depth preview |
+| --- | --- |
+| <img src="outputs/rgbd/20260612_150336_276/rgb/orbbec_rgbd_0001_color.jpg" alt="Orbbec RGB sample" width="420"> | <img src="outputs/rgbd/20260612_150336_276/depth/orbbec_rgbd_0001_depth_preview.jpg" alt="Orbbec depth preview sample" width="320"> |
+
+该示例使用 `--align-mode sw --save-depth-preview` 保存；深度预览图按 `0-5m` 做伪彩色映射，黑色区域表示无有效深度。
+
 默认不会输出伪彩色图。如果需要保存一张方便肉眼查看的深度伪彩色图：
 
 ```bash
 python scripts/capture_rgbd_orbbec_sdk.py \
   --frames 1 \
+  --align-mode sw \
   --save-depth-preview
 ```
 
