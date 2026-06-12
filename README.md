@@ -21,6 +21,11 @@ orbbec/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
+├── docs/
+│   └── assets/
+│       ├── orbbec_rgb_sample.jpg
+│       ├── orbbec_depth_sample.png
+│       └── orbbec_depth_pseudo_sample.jpg
 ├── scripts/
 │   ├── camera_viewer.py
 │   ├── capture_rgbd_orbbec_sdk.py
@@ -139,7 +144,7 @@ python scripts/capture_rgbd_orbbec_sdk.py \
 - `*.json`：单帧元数据。
 - `manifest.jsonl`：本次采集索引。
 
-当前 README 使用的本地 RGB-D 示例来自：
+当前 README 使用的 GitHub 首页示例图已复制到 `docs/assets/`，原始采集结果来自：
 
 ```text
 outputs/rgbd/20260612_150336_276/
@@ -153,11 +158,11 @@ outputs/rgbd/20260612_150336_276/
 └── manifest.jsonl
 ```
 
-| RGB | Depth preview |
-| --- | --- |
-| <img src="outputs/rgbd/20260612_150336_276/rgb/orbbec_rgbd_0001_color.jpg" alt="Orbbec RGB sample" width="420"> | <img src="outputs/rgbd/20260612_150336_276/depth/orbbec_rgbd_0001_depth_preview.jpg" alt="Orbbec depth preview sample" width="320"> |
+| RGB | Depth | Pseudo depth |
+| --- | --- | --- |
+| <img src="docs/assets/orbbec_rgb_sample.jpg" alt="Orbbec RGB sample" width="320"> | <img src="docs/assets/orbbec_depth_sample.png" alt="Orbbec raw depth sample" width="260"> | <img src="docs/assets/orbbec_depth_pseudo_sample.jpg" alt="Orbbec pseudo depth sample" width="260"> |
 
-该示例使用 `--align-mode sw --save-depth-preview` 保存；深度预览图按 `0-5m` 做伪彩色映射，黑色区域表示无有效深度。
+该示例使用 `--align-mode sw --save-depth-preview` 保存；Depth 是 16-bit 灰度 PNG，Pseudo depth 按 `0-5m` 做伪彩色映射，黑色区域表示无有效深度。
 
 默认不会输出伪彩色图。如果需要保存一张方便肉眼查看的深度伪彩色图：
 
